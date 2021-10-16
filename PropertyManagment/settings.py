@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'listings.apps.ListingsConfig'
+    'django.contrib.humanize',
+    "sorl.thumbnail",
+    'listings.apps.ListingsConfig',
+    "pages.apps.PagesConfig"
 ]
 
 MIDDLEWARE = [
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'PropertyManagment.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR , "/template"), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
