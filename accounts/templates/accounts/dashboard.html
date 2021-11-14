@@ -1,0 +1,145 @@
+{% extends 'base.html' %} {% block title %}Dashboard | {%endblock %} {% load
+humanize %} {% block content %}
+
+<!-- Showcase -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">Welcome, {{ user }}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Messages -->
+<section class="py-4">
+  <div class="container">
+    <h4 class="mb-4">Your Messages</h4>
+    <div class="row">
+      {% if contacts %}
+      <table class="table table-bordered table-striped shadow-sm">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 5%">#</th>
+            <th style="width: 25%">Listing</th>
+            <th style="width: 20%">Name</th>
+            <th style="width: 20%">Phone</th>
+            <th style="width: 20%">Email</th>
+            <th class="text-center" style="width: 10%">Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+          <tr>
+            <td class="text-center">{{ forloop.counter }}</td>
+            <td>
+              <a href="{% url 'listing' contact.listing_id %}"
+                >{{ contact.listing }}</a
+              >
+            </td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>
+              <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+            </td>
+            <td class="text-center">
+              {% comment %}<button
+                data-toggle="modal"
+                data-target="#message-modal"
+                class="btn btn-outline-primary btn-block"
+              >
+                View</button
+              >{% endcomment %}
+              <a
+                href="#"
+                data-toggle="modal"
+                data-target="#message-modal{{ contact.id }}"
+              >
+                <i class="far fa-comment"></i>
+              </a>
+              <!-- Contact Modal -->
+              <section>
+                <div
+                  class="modal fade"
+                  id="message-modal{{ contact.id }}"
+                  role="dialog"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="inquiryModalLabel">
+                          Message
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                        >
+                          <span>&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body text-left">
+                        <p>{{ contact.message|linebreaks }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>You have no messages.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Listings -->
+<section class="py-4">
+  <div class="container">
+    <h4 class="mb-4">Your Properties</h4>
+    <div class="row">
+      {% if listings %}
+      <table class="table table-bordered table-striped shadow-sm">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 5%">#</th>
+            <th style="width: 25%">Listing</th>
+            <th style="width: 45%">Address</th>
+            <th style="width: 15%">Price</th>
+            <th class="text-center" style="width: 10%">Published</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for listing in listings %}
+          <tr>
+            <td class="text-center">{{ forloop.counter }}</td>
+            <td>
+              <a href="{% url 'listing' listing.id %}">{{ listing.title }}</a>
+            </td>
+            <td>
+              {{ listing.address }} {{ listing.address2 }}, {{ listing.city }},
+              {{ listing.state }} {{ listing.zipcode }}
+            </td>
+            <td>₹{{ listing.price}}</td>
+            <td class="text-center">
+              {% if listing.is_published %}
+              <i class="fa fa-check"></i>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>You have no listings.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

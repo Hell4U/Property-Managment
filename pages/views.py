@@ -11,4 +11,4 @@ def index(request):
         'state_choices':states_choices,
         'beds_min_choices':beds_min_choices
     }
-    return render(request,"index.html",context)
+    return render(request,"pages/index.html",context)

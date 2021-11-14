@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% block title %}Login | {% endblock %}
+<!---->{% block content %}
+<section id="login" class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-sign-in-alt"></i> Login</h4>
+          </div>
+          <div class="card-body">
+            <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  class="form-control"
+                  id="username"
+                  value="test"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  id="password"
+                  value="homefinder"
+                  required
+                />
+              </div>
+              <input type="hidden" name="next" value="{{ request.GET.next }}" />
+              <input
+                type="submit"
+                value="Log In"
+                class="btn btn-primary btn-block mt-4"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

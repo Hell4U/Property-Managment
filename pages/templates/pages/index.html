@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load i18n %} {% load humanize %} {% load thumbnail
-%} {% block title %}{{'Welcome' }} | {% endblock %} {% block content %}
+%} {% block title %}{{'Welcome' }} | {% endblock title %} {% block content %}
 
 <!-- Showcase -->
 <section class="showcase-search py-4 mt-4">
@@ -7,7 +7,8 @@
     <div class="row text-center">
       <div class="col-md-12">
         <h1 class="display-4 mb-5">Discover your new home</h1>
-        <form action="{% url 'search' %}">
+        <!-- TODO: Add search url here -->
+        <form action="">
           <div class="form-row">
             <div class="col-md-8 mx-auto mb-4">
               <div class="input-group shadow-sm">
@@ -41,21 +42,26 @@
       <!-- Listing -->
       <div class="col-md-4 mb-4">
         <div class="card listing-preview shadow-sm">
-          {% thumbnail listing.photo_main "400x300" crop="100%" as photo %}
-          <a href="{% url 'listing' listing.id %}">
-            <img class="card-img-top" src="{{ feature_image.url }}" alt="" />
+          <!-- TODO: Add listing and it's id here in url -->
+          <a href="">
+            <img
+              class="card-img-top"
+              src="{{ listing.feature_image.url }}"
+              alt=""
+              width="400px"
+              height="300px"
+            />
             <div class="card-img-overlay">
               <h2>
                 <span class="badge bg-price text-white"
-                  >₹{{ listing.feature_image|intcomma }}<span
+                  >₹{{ listing.price|intcomma }}<span
                     class="font-weight-normal"
-                    >/mo</span
                   ></span
-                >
+                ></span>
               </h2>
             </div>
           </a>
-          {% endthumbnail %}
+
           <div class="card-body">
             <div class="listing-heading text-center">
               <p>
@@ -66,12 +72,11 @@
             <hr />
             <div class="row py-2">
               <div class="col-6">
-                <i class="fa fa-bed"></i> {{ listing.bedrooms }} {% translate
-                'bd' %}
+                <i class="fa fa-bed"></i> {{ listing.bedrooms }} bd
               </div>
               <div class="col-6">
                 <i class="fa fa-bath"></i> {{ listing.bathrooms|floatformat }}
-                {% translate 'ba' %}
+                ba
               </div>
             </div>
             <div class="row py-2">
@@ -96,9 +101,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="col-4 mx-auto mt-5">
-          <a href="{% url 'listings' %}" class="btn btn-primary btn-block"
-            >View More</a
-          >
+          <!-- TODO: Add listings url here -->
+          <a href="" class="btn btn-primary btn-block">View More</a>
         </div>
       </div>
     </div>

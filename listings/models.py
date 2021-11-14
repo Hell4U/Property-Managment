@@ -1,4 +1,4 @@
-import uuid
+
 from datetime import datetime
 
 import pytz
@@ -28,7 +28,7 @@ class Listing(models.Model):
     image_4 = models.ImageField(upload_to="house/")
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now(pytz.timezone("Asia/Kolkata")))
-    id=models.UUIDField(default= uuid.uuid4, unique=True, primary_key=True, editable=False )
+  
 
     def __str__(self):
         return self.title
